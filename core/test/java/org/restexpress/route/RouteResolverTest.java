@@ -74,7 +74,7 @@ public class RouteResolverTest
 	public void shouldResolveAliasBarGetRoute()
 	{
 		FullHttpRequest httpRequest = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/bar/bar432.json?value=ignored");
-		httpRequest.headers().add("Host", "testing-host");
+		httpRequest.headers().add((CharSequence)"Host", "testing-host");
 		Request request = new Request(httpRequest, null);
 		Action action = resolver.resolve(request);
 		assertNotNull(action);

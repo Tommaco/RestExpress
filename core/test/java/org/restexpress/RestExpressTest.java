@@ -208,28 +208,28 @@ public class RestExpressTest
 		HttpClient client = new DefaultHttpClient();
 
 		HttpPost post = new HttpPost(TEST_URL);
-		post.addHeader(HttpHeaders.Names.ACCEPT, "application/json");
+		post.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/json");
 		HttpResponse response = (HttpResponse) client.execute(post);
 		assertEquals(201, response.getStatusLine().getStatusCode());
 		assertEquals(ContentType.JSON, controller.outputMediaType);
 		post.releaseConnection();
 
 		HttpGet get = new HttpGet(TEST_URL);
-		get.addHeader(HttpHeaders.Names.ACCEPT, "application/json");
+		get.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/json");
 		response = (HttpResponse) client.execute(get);
 		assertEquals(200, response.getStatusLine().getStatusCode());
 		assertEquals(ContentType.JSON, controller.outputMediaType);
 		get.releaseConnection();
 
 		HttpPut put = new HttpPut(TEST_URL);
-		put.addHeader(HttpHeaders.Names.ACCEPT, "application/json");
+		put.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/json");
 		response = (HttpResponse) client.execute(put);
 		assertEquals(200, response.getStatusLine().getStatusCode());
 		assertEquals(ContentType.JSON, controller.outputMediaType);
 		put.releaseConnection();
 
 		HttpDelete delete = new HttpDelete(TEST_URL);
-		delete.addHeader(HttpHeaders.Names.ACCEPT, "application/json");
+		delete.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/json");
 		response = (HttpResponse) client.execute(delete);
 		assertEquals(200, response.getStatusLine().getStatusCode());
 		assertEquals(ContentType.JSON, controller.outputMediaType);

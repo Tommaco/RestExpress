@@ -224,7 +224,7 @@ public class RestExpressServerTest
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
 		assertEquals("\"" + URL3_PLAIN + "\"", EntityUtils.toString(entity));
-		String methods = response.getHeaders(HttpHeaders.Names.ALLOW)[0].getValue();
+		String methods = response.getHeaders(HttpHeaders.Names.ALLOW.toString())[0].getValue();
 		assertTrue(methods.contains("GET"));
 		assertTrue(methods.contains("POST"));
 		request.releaseConnection();
@@ -243,7 +243,7 @@ public class RestExpressServerTest
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
 		assertEquals("\"" + URL3_PLAIN + "?_ignore_http_status=true\"", EntityUtils.toString(entity));
-		String methods = response.getHeaders(HttpHeaders.Names.ALLOW)[0].getValue();
+		String methods = response.getHeaders(HttpHeaders.Names.ALLOW.toString())[0].getValue();
 		assertTrue(methods.contains("GET"));
 		assertTrue(methods.contains("POST"));
 		request.releaseConnection();
@@ -288,7 +288,7 @@ public class RestExpressServerTest
 		server.bind(SERVER_PORT);
 
 		HttpGet request = new HttpGet(URL1_PLAIN);
-		request.addHeader(HttpHeaders.Names.ACCEPT, "application/xml");
+		request.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/xml");
 		HttpResponse response = (HttpResponse) http.execute(request);
 		assertEquals(HttpResponseStatus.OK.code(), response.getStatusLine().getStatusCode());
 		HttpEntity entity = response.getEntity();
@@ -305,7 +305,7 @@ public class RestExpressServerTest
 		server.bind(SERVER_PORT);
 
 		HttpGet request = new HttpGet(URL1_XML);
-		request.addHeader(HttpHeaders.Names.ACCEPT, "application/json");
+		request.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/json");
 		HttpResponse response = (HttpResponse) http.execute(request);
 		assertEquals(HttpResponseStatus.OK.code(), response.getStatusLine().getStatusCode());
 		HttpEntity entity = response.getEntity();
@@ -472,7 +472,7 @@ public class RestExpressServerTest
 		server.bind(SERVER_PORT);
 
 		HttpGet request = new HttpGet(URL1_PLAIN);
-		request.addHeader(HttpHeaders.Names.ACCEPT, "application/nogood");
+		request.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/nogood");
 		HttpResponse response = (HttpResponse) http.execute(request);
 		assertEquals(HttpResponseStatus.NOT_ACCEPTABLE.code(), response.getStatusLine().getStatusCode());
 		HttpEntity entity = response.getEntity();
@@ -511,7 +511,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
-		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE);
+		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString());
 		assertNotNull(range);
 		assertEquals("items 0-2/3", range.getValue());
 		LittleO[] result = serializer.getSerializer(Format.JSON).deserialize(EntityUtils.toString(entity), LittleO[].class);
@@ -526,13 +526,13 @@ public class RestExpressServerTest
 		server.bind(SERVER_PORT);
 
 		HttpGet request = new HttpGet(LITTLE_OS_URL);
-		request.addHeader(HttpHeaders.Names.ACCEPT, "no-good/no-good");
+		request.addHeader(HttpHeaders.Names.ACCEPT.toString(), "no-good/no-good");
 		HttpResponse response = (HttpResponse) http.execute(request);
 		assertEquals(HttpResponseStatus.NOT_ACCEPTABLE.code(), response.getStatusLine().getStatusCode());
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
-		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE));
+		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString()));
 		assertEquals("\"Supported Media Types: application/json; charset=UTF-8, application/javascript; charset=UTF-8, text/javascript; charset=UTF-8, application/xml; charset=UTF-8, text/xml; charset=UTF-8\"", EntityUtils.toString(entity));
 		request.releaseConnection();
 	}
@@ -570,7 +570,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
-		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE);
+		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString());
 		assertNotNull(range);
 		assertEquals("items 0-2/3", range.getValue());
 		String result = EntityUtils.toString(entity);
@@ -611,7 +611,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.XML, entity.getContentType().getValue());
-		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE);
+		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString());
 		assertNotNull(range);
 		assertEquals("items 0-2/3", range.getValue());
 		String entityString = EntityUtils.toString(entity);
@@ -653,7 +653,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.XML, entity.getContentType().getValue());
-		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE);
+		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString());
 		assertNotNull(range);
 		assertEquals("items 0-2/3", range.getValue());
 		String entityString = EntityUtils.toString(entity);
@@ -674,13 +674,13 @@ public class RestExpressServerTest
 		server.bind(SERVER_PORT);
 
 		HttpGet request = new HttpGet(LITTLE_OS_URL);
-		request.addHeader(HttpHeaders.Names.ACCEPT, "application/hal+json");
+		request.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/hal+json");
 		HttpResponse response = (HttpResponse) http.execute(request);
 		assertEquals(HttpResponseStatus.OK.code(), response.getStatusLine().getStatusCode());
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.HAL_JSON, entity.getContentType().getValue());
-		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE);
+		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString());
 		assertNotNull(range);
 		assertEquals("items 0-2/3", range.getValue());
 		String entityString = EntityUtils.toString(entity);
@@ -701,13 +701,13 @@ public class RestExpressServerTest
 		server.bind(SERVER_PORT);
 
 		HttpGet request = new HttpGet(LITTLE_OS_URL);
-		request.addHeader(HttpHeaders.Names.ACCEPT, "application/hal+xml");
+		request.addHeader(HttpHeaders.Names.ACCEPT.toString(), "application/hal+xml");
 		HttpResponse response = (HttpResponse) http.execute(request);
 		assertEquals(HttpResponseStatus.OK.code(), response.getStatusLine().getStatusCode());
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.HAL_XML, entity.getContentType().getValue());
-		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE);
+		Header range = response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString());
 		assertNotNull(range);
 		assertEquals("items 0-2/3", range.getValue());
 		String entityString = EntityUtils.toString(entity);
@@ -733,7 +733,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
-		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE));
+		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString()));
 		String entityString = EntityUtils.toString(entity);
 		assertNotNull(entityString);
 		assertTrue(entityString.contains("\"errorId\":\""));
@@ -761,7 +761,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
-		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE));
+		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString()));
 		String entityString = EntityUtils.toString(entity);
 		assertNotNull(entityString);
 		assertTrue(entityString.contains("\"errorId\":\""));
@@ -787,7 +787,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
-		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE));
+		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString()));
 		String entityString = EntityUtils.toString(entity);
 		assertNotNull(entityString);
 		assertTrue(entityString.contains("\"errorId\":\""));
@@ -814,7 +814,7 @@ public class RestExpressServerTest
 		HttpEntity entity = response.getEntity();
 		assertTrue(entity.getContentLength() > 0l);
 		assertEquals(ContentType.JSON, entity.getContentType().getValue());
-		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE));
+		assertNull(response.getFirstHeader(HttpHeaders.Names.CONTENT_RANGE.toString()));
 		String entityString = EntityUtils.toString(entity);
 		assertNotNull(entityString);
 		assertTrue(entityString.contains("\"errorId\":\""));
@@ -861,7 +861,7 @@ public class RestExpressServerTest
     {
         server.bind(SERVER_PORT);
         HttpGet request = new HttpGet(URL1_PLAIN);
-        request.addHeader(HttpHeaders.Names.ACCEPT_ENCODING,"gzip");
+        request.addHeader(HttpHeaders.Names.ACCEPT_ENCODING.toString(),"gzip");
         HttpResponse response = (HttpResponse) http.execute(request);
         assertEquals(HttpResponseStatus.OK.code(), response.getStatusLine().getStatusCode());
 
@@ -886,7 +886,7 @@ public class RestExpressServerTest
     {
         server.bind(SERVER_PORT);
         HttpGet request = new HttpGet(URL1_PLAIN);
-        request.addHeader(HttpHeaders.Names.ACCEPT_ENCODING,"deflate");
+        request.addHeader(HttpHeaders.Names.ACCEPT_ENCODING.toString(),"deflate");
         HttpResponse response = (HttpResponse) http.execute(request);
         assertEquals(HttpResponseStatus.OK.code(), response.getStatusLine().getStatusCode());
 
@@ -912,7 +912,7 @@ public class RestExpressServerTest
     server.bind(SERVER_PORT);
 
     HttpPut request = new HttpPut(URL_ECHO);
-    request.addHeader(HttpHeaders.Names.CONTENT_ENCODING, "gzip");
+    request.addHeader(HttpHeaders.Names.CONTENT_ENCODING.toString(), "gzip");
 
 
     BasicHttpEntity requestEntity = new BasicHttpEntity();
@@ -941,7 +941,7 @@ public class RestExpressServerTest
         server.bind(SERVER_PORT);
 
         HttpPut request = new HttpPut(URL_ECHO);
-        request.addHeader(HttpHeaders.Names.CONTENT_ENCODING, "deflate");
+        request.addHeader(HttpHeaders.Names.CONTENT_ENCODING.toString(), "deflate");
 
 
         BasicHttpEntity requestEntity = new BasicHttpEntity();

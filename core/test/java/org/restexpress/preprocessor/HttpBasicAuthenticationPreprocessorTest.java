@@ -48,7 +48,7 @@ public class HttpBasicAuthenticationPreprocessorTest
 	@Test
 	public void shouldSetRequestHeadersOnSuccess()
 	{
-		r.addHeader(HttpHeaders.Names.AUTHORIZATION, "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==");
+		r.addHeader(HttpHeaders.Names.AUTHORIZATION.toString(), "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==");
 		p.process(r);
 		assertEquals("Aladdin", r.getHeader(HttpBasicAuthenticationPreprocessor.X_AUTHENTICATED_USER));
 		assertEquals("open sesame", r.getHeader(HttpBasicAuthenticationPreprocessor.X_AUTHENTICATED_PASSWORD));
@@ -63,7 +63,7 @@ public class HttpBasicAuthenticationPreprocessorTest
 		}
 		catch(UnauthorizedException e)
 		{
-			String value = e.getHeader(HttpHeaders.Names.WWW_AUTHENTICATE);
+			String value = e.getHeader(HttpHeaders.Names.WWW_AUTHENTICATE.toString());
 			assertNotNull(value);
 			assertEquals("Basic realm=\"Test Realm\"", value);
 			
@@ -78,21 +78,21 @@ public class HttpBasicAuthenticationPreprocessorTest
 	@Test(expected=UnauthorizedException.class)
 	public void shouldHandleEmptyCredentials()
 	{
-		r.addHeader(HttpHeaders.Names.AUTHORIZATION, "Basic");
+		r.addHeader(HttpHeaders.Names.AUTHORIZATION.toString(), "Basic");
 		p.process(r);
 	}
 
 	@Test(expected=UnauthorizedException.class)
 	public void shouldHandleBadCredentials()
 	{
-		r.addHeader(HttpHeaders.Names.AUTHORIZATION, "Basic toddf:no-worky");
+		r.addHeader(HttpHeaders.Names.AUTHORIZATION.toString(), "Basic toddf:no-worky");
 		p.process(r);
 	}
 
 	@Test(expected=UnauthorizedException.class)
 	public void shouldHandleInvalidAuthType()
 	{
-		r.addHeader(HttpHeaders.Names.AUTHORIZATION, "Basicorsomething");
+		r.addHeader(HttpHeaders.Names.AUTHORIZATION.toString(), "Basicorsomething");
 		p.process(r);
 	}
 }

@@ -62,7 +62,7 @@ public class DefaultRequestHandlerTest
 	private Channel channel;
     private ChannelPipeline pl;
     private StringBuffer responseBody;
-    private Map<String, List<String>> responseHeaders;
+    private Map<CharSequence, List<String>> responseHeaders;
 	
 	@Before
 	public void initialize()
@@ -81,7 +81,7 @@ public class DefaultRequestHandlerTest
 		observer = new DummyObserver();
 		messageHandler.addMessageObserver(observer);
 		responseBody = new StringBuffer();
-		responseHeaders = new HashMap<String, List<String>>();
+		responseHeaders = new HashMap<CharSequence, List<String>>();
 		messageHandler.setResponseWriter(new StringBufferHttpResponseWriter(responseHeaders, responseBody));
         channel = new EmbeddedChannel(messageHandler);
         pl = channel.pipeline();
