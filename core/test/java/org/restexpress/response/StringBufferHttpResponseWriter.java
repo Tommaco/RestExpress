@@ -32,7 +32,7 @@ import org.restexpress.Response;
 public class StringBufferHttpResponseWriter
 implements HttpResponseWriter
 {
-	private Map<String, List<String>> headers;
+	private Map<CharSequence, List<String>> headers;
 	private StringBuffer body;
 
 	public StringBufferHttpResponseWriter(StringBuffer buffer)
@@ -40,7 +40,7 @@ implements HttpResponseWriter
 		this(null, buffer);
 	}
 
-	public StringBufferHttpResponseWriter(Map<String, List<String>> headers, StringBuffer buffer)
+	public StringBufferHttpResponseWriter(Map<CharSequence, List<String>> headers, StringBuffer buffer)
 	{
 		super();
 		this.body = buffer;
@@ -52,7 +52,7 @@ implements HttpResponseWriter
 	{
 		if (headers != null)
 		{
-			for (String headerName : response.getHeaderNames())
+			for (CharSequence headerName : response.getHeaderNames())
 			{
 				List<String> headerValues = new ArrayList<String>(response.getHeaders(headerName));
 				headers.put(headerName, headerValues);
