@@ -42,7 +42,7 @@ public class Response
 
 	private HttpResponseStatus responseCode = OK;
 	private Object body;
-	private Map<String, List<String>> headers = new HashMap<String, List<String>>();
+	private Map<CharSequence, List<String>> headers = new HashMap<CharSequence, List<String>>();
 	private boolean isSerialized = true;
 	private Throwable exception = null;
 	private SerializationSettings serializationSettings;
@@ -77,7 +77,7 @@ public class Response
 		headers.clear();
 	}
 
-	public String getHeader(String name)
+	public String getHeader(CharSequence name)
 	{
 		List<String> list = headers.get(name);
 
@@ -89,12 +89,12 @@ public class Response
 		return null;
 	}
 
-	public List<String> getHeaders(String name)
+	public List<String> getHeaders(CharSequence name)
 	{
 		return headers.get(name);
 	}
 	
-	public boolean hasHeader(String name)
+	public boolean hasHeader(CharSequence name)
 	{
 		return (getHeader(name) != null);
 	}
@@ -104,7 +104,7 @@ public class Response
 		return !headers.isEmpty();
 	}
 
-	public Set<String> getHeaderNames()
+	public Set<CharSequence> getHeaderNames()
 	{
 		return headers.keySet();
 	}
@@ -115,7 +115,7 @@ public class Response
 	 * @param name
 	 * @param value
 	 */
-	public void addHeader(String name, String value)
+	public void addHeader(CharSequence name, String value)
 	{
 		List<String> list = headers.get(name);
 		

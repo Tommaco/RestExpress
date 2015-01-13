@@ -303,7 +303,7 @@ public class Request
 	 * @param name
 	 * @return the requested header, or null if 'name' doesn't exist as a header.
 	 */
-	public String getHeader(String name)
+	public String getHeader(CharSequence name)
 	{
 		return httpRequest.headers().get(name);
 	}
@@ -496,7 +496,7 @@ public class Request
         //This is the logic the Netty 3.9.x used to determine if data was chunked.  There may be a methodology more
         // inline with Netty 4.x.x to determine if the request is chunked.  TODO: Implement updated logic.
         for (String header : httpRequest.headers().getAll(HttpHeaders.Names.TRANSFER_ENCODING)) {
-            if (HttpHeaders.Values.CHUNKED.equalsIgnoreCase(header)) {
+            if (HttpHeaders.Values.CHUNKED.toString().equalsIgnoreCase(header)) {
                 return true;
             }
         }

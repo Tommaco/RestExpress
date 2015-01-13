@@ -70,7 +70,7 @@ public class DefaultHttpResponseWriter
      * @param httpResponse
      */
     private void addHeaders(Response response, HttpResponse httpResponse) {
-        for (String name : response.getHeaderNames()) {
+        for (CharSequence name : response.getHeaderNames()) {
             for (String value : response.getHeaders(name)) {
                 httpResponse.headers().add(name, value);
             }

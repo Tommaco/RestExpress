@@ -37,7 +37,7 @@ extends RuntimeException
 
 	private UUID id;
 	private HttpResponseStatus httpStatus;
-	private Map<String, String> headers;
+	private Map<CharSequence, String> headers;
 
 	
 	// SECTION: CONSTRUCTORS
@@ -130,18 +130,18 @@ extends RuntimeException
 	{
 		if (hasHeaders())
 		{
-			for (Entry<String, String> header : headers.entrySet())
+			for (Entry<CharSequence, String> header : headers.entrySet())
 			{
 				response.addHeader(header.getKey(), header.getValue());
 			}
 		}
 	}
 
-	public void setHeader(String name, String value)
+	public void setHeader(CharSequence name, String value)
 	{
 		if (headers == null)
 		{
-			headers = new HashMap<String, String>();
+			headers = new HashMap<CharSequence, String>();
 		}
 		
 		headers.put(name, value);
