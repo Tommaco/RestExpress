@@ -118,7 +118,7 @@ extends SimpleChannelInboundHandler<FullHttpRequest>
 	// SECTION: SIMPLE-CHANNEL-UPSTREAM-HANDLER
 
 	@Override
-	public void channelRead0(ChannelHandlerContext ctx, FullHttpRequest event)
+	public void messageReceived(ChannelHandlerContext ctx, FullHttpRequest event)
 	throws Exception
 	{
 		MessageContext context = createInitialContext(ctx, event);
