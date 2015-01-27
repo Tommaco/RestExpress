@@ -35,7 +35,7 @@ import org.restexpress.serialization.SerializationSettings;
  */
 public class Response
 {
-	private static final String CONTENT_RANGE_HEADER_NAME = "Content-Range";
+	private static final CharSequence CONTENT_RANGE_HEADER_NAME = HttpHeaders.Names.CONTENT_RANGE;
 
 	
 	// SECTION: INSTANCE VARIABLES
