@@ -63,7 +63,7 @@ public class HttpBasicAuthenticationPreprocessorTest
 		}
 		catch(UnauthorizedException e)
 		{
-			String value = e.getHeader(HttpHeaders.Names.WWW_AUTHENTICATE.toString());
+			String value = e.getHeader(HttpHeaders.Names.WWW_AUTHENTICATE);
 			assertNotNull(value);
 			assertEquals("Basic realm=\"Test Realm\"", value);
 			

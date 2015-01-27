@@ -152,7 +152,7 @@ extends RuntimeException
 		return (headers != null && !headers.isEmpty());
 	}
 
-	public String getHeader(String name)
+	public String getHeader(CharSequence name)
 	{
 		return (headers == null ? null : headers.get(name));
 	}
