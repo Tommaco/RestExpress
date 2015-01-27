@@ -98,7 +98,7 @@ public class DefaultRequestHandlerTest
 		assertEquals(1, observer.getSuccessCount());
 //		System.out.println(responseBody.toString());
 		assertEquals("should be text plain, here", responseBody.toString());
-		assertTrue(responseHeaders.containsKey("Content-Type"));
+		assertTrue(responseHeaders.containsKey(HttpHeaders.Names.CONTENT_TYPE));
 		List<String> contentTypes = responseHeaders.get(HttpHeaders.Names.CONTENT_TYPE);
 		assertEquals(1, contentTypes.size());
 		assertEquals("text/plain; charset=UTF-8", contentTypes.get(0));
@@ -115,7 +115,7 @@ public class DefaultRequestHandlerTest
 		assertEquals(1, observer.getSuccessCount());
 //		System.out.println(responseBody.toString());
 		assertEquals("<html><body>Some kinda wonderful!</body></html>", responseBody.toString());
-		assertTrue(responseHeaders.containsKey("Content-Type"));
+		assertTrue(responseHeaders.containsKey(HttpHeaders.Names.CONTENT_TYPE));
 		List<String> contentTypes = responseHeaders.get(HttpHeaders.Names.CONTENT_TYPE);
 		assertEquals(1, contentTypes.size());
 		assertEquals("text/html", contentTypes.get(0));
@@ -412,7 +412,7 @@ public class DefaultRequestHandlerTest
 		assertEquals(1, observer.getCompleteCount());
 		assertEquals(1, observer.getSuccessCount());
 		assertEquals("\"raw string\"", responseBody.toString());
-		assertTrue(responseHeaders.containsKey("Content-Type"));
+		assertTrue(responseHeaders.containsKey(HttpHeaders.Names.CONTENT_TYPE));
 		List<String> contentTypes = responseHeaders.get(HttpHeaders.Names.CONTENT_TYPE);
 		assertEquals(1, contentTypes.size());
 		assertEquals("application/json; charset=UTF-8", contentTypes.get(0));
@@ -427,7 +427,7 @@ public class DefaultRequestHandlerTest
 		assertEquals(1, observer.getReceivedCount());
 		assertEquals(1, observer.getCompleteCount());
 		assertEquals(1, observer.getSuccessCount());
-		assertTrue(responseHeaders.containsKey("Content-Type"));
+		assertTrue(responseHeaders.containsKey(HttpHeaders.Names.CONTENT_TYPE));
 		List<String> contentTypes = responseHeaders.get(HttpHeaders.Names.CONTENT_TYPE);
 		assertEquals(1, contentTypes.size());
 		assertEquals("application/json; charset=UTF-8", contentTypes.get(0));
@@ -538,7 +538,7 @@ public class DefaultRequestHandlerTest
 
 		public String contentHeaderAction(Request request, Response response)
 		{
-			response.addHeader("Content-Type", "text/html");
+			response.addHeader(HttpHeaders.Names.CONTENT_TYPE, "text/html");
 			response.noSerialization();
 			return "<html><body>Wow! What a fabulous HTML body...</body></html>";
 		}
